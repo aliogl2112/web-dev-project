@@ -57,41 +57,47 @@ fetch("data.json")
 }
 
 function nextWeek(){
-    ui.days.style.opacity=0;
-    setTimeout(()=>{
+    if(weekIndex==2){
+        return;
+    }
+    else{
+        ui.days.style.opacity=0;
+        setTimeout(()=>{
+        ui.days.style.opacity=0;
         if(weekIndex==0){
             weekIndex++;
-            displayWeeklyWeather(weeklyWeather.current)
-        }
-        else if(weekIndex==1){
-            weekIndex++;
-            displayWeeklyWeather(weeklyWeather.next)
+            displayWeeklyWeather(weeklyWeather.current);
         }
         else{
-            weekIndex=0;
-            displayWeeklyWeather(weeklyWeather.previous);
+            weekIndex++;
+            displayWeeklyWeather(weeklyWeather.next);
         }
     },200)
+    }
     
+    console.log(weekIndex)
 }
 ui.nextWeek.addEventListener("click",nextWeek)
 
 function previousWeek(){
-    ui.days.style.opacity=0;
-    setTimeout(()=>{
-        if(weekIndex==0){
-            weekIndex=2;
-            displayWeeklyWeather(weeklyWeather.next)
-        }
-        else if(weekIndex==1){
-            weekIndex--;
-            displayWeeklyWeather(weeklyWeather.previous)
-        }
-        else{
-            weekIndex=1;
-            displayWeeklyWeather(weeklyWeather.current);
-        }
-    },200)
+    if(weekIndex==0){
+        return;
+    }
+    else{
+        ui.days.style.opacity=0;
+        setTimeout(()=>{
+            if(weekIndex==1){
+                weekIndex--;
+                displayWeeklyWeather(weeklyWeather.previous);
+            }
+            else{
+                weekIndex=1;
+                displayWeeklyWeather(weeklyWeather.current);
+            }
+        },200)
+    }
+    
+    console.log(weekIndex)
 }
 ui.previousWeek.addEventListener("click",previousWeek)
 
